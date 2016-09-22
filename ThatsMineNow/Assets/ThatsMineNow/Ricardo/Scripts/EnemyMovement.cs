@@ -46,57 +46,6 @@ public class EnemyMovement : MonoBehaviour {
 
 		if (!IsStanding() && isHit && rb.velocity.Equals(Vector3.zero)) {
 			StandUp ();
-=======
-public class EnemyMovement : MonoBehaviour
-{
-
-    GameObject ball;
-    GameObject gate;
-    public float speed = 10000.0f;
-
-    public bool walkToBall = true;
-
-    bool reachedBall = false;
-    bool ballIsChild = false;
-    bool isHit = false;
-
-    Rigidbody rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-
-        ball = GameObject.FindWithTag("Ball");
-        gate = GameObject.FindWithTag("Gate");
-    }
-
-    void Update()
-    {
-
-        Debug.Log(transform.eulerAngles);
-        Debug.Log(IsStanding());
-        if (walkToBall && !reachedBall && !isHit)
-        {
-            WalkToObject(ball);
-        }
-
-        if (reachedBall && !ballIsChild)
-        {
-            ball.transform.parent = transform;
-            ball.transform.localPosition = new Vector3(-0.61f, -0.057f, 0.4f);
-            ballIsChild = true;
-        }
-
-        if (ballIsChild && !isHit)
-        {
-            WalkToObject(gate);
-        }
-
-        if (!IsStanding() && isHit && rb.velocity.sqrMagnitude < new Vector3(1, 1, 1).sqrMagnitude)
-        {
-            StandUp();
->>>>>>> origin/master
             isHit = false;
         }
 
