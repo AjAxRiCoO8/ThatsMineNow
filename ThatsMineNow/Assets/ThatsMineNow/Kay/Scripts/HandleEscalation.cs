@@ -55,13 +55,6 @@ public class HandleEscalation : MonoBehaviour
         UpdateEscalationLevel();
         UpdateEscalationBar();
         UpdateReductionTimers();
-
-        //Player attacks ( DEBUGGING)
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            currentEscalation += 5;
-            timeTillReduction = reductionTime;
-        }
     }
 
     /*****************************/
@@ -174,7 +167,11 @@ public class HandleEscalation : MonoBehaviour
     public float CurrentEscalation
     {
         get { return currentEscalation; }
-        set { currentEscalation = value; }
+        set
+        {
+            currentEscalation = value;
+            timeTillReduction = reductionTime;
+        }
     }
 
     public int CurrentEscalationLevel
