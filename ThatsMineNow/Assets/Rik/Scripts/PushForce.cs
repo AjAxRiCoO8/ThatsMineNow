@@ -41,6 +41,12 @@ public class PushForce : MonoBehaviour {
                 if (hit.rigidbody != null)
                 {
                     hit.rigidbody.AddForce(transform.forward * strength);
+
+                    //activate the hit script of the enemy
+                    GameObject enemy = hit.collider.gameObject;
+                    EnemyMovement enemyMovement =  enemy.GetComponent<EnemyMovement>();
+                    enemyMovement.Hit();
+
                 }
             }
         }
