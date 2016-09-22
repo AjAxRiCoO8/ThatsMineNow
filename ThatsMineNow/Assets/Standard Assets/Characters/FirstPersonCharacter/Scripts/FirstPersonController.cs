@@ -41,7 +41,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-
+        //public Transform ShovingArm1Prefab;
         // Use this for initialization
         private void Start()
         {
@@ -55,6 +55,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            //Transform ShovingArm1 = Instantiate(ShovingArm1Prefab) as Transform;
+            //Physics.IgnoreCollision(ShovingArm1.GetComponent<Collider>(), GetComponent<Collider>);
         }
 
 
