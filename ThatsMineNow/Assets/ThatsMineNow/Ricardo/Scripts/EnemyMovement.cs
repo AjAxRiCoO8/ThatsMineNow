@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-<<<<<<< HEAD
 public class EnemyMovement : MonoBehaviour {
 
 	public GameObject ball;
