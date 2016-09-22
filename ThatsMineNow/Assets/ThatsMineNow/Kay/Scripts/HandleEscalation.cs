@@ -4,25 +4,35 @@ using UnityEngine.UI;
 public class HandleEscalation : MonoBehaviour
 {
     [Header("Escalation Bar")]
+    [Tooltip("The image of the escalation bar")]
     [SerializeField] private Image escalationBar;
+    [Tooltip("The text for the escalation level")]
     [SerializeField] private Text escalationLevel;
 
     [Header("Escalation Values")]
+    [Tooltip("The maximum value of escalation")]
     [SerializeField] private float maxEscalation = 100.0f;
+    [Tooltip("The multiplier of the maximum escalation when the escalation level goes up")]
     [SerializeField] private float maxEscalationMultiplier = 2.0f;
+    [Tooltip("The current value of escalation")]
     [SerializeField] private float currentEscalation = 0.0f;
 
     [Header("Escalation Level")]
+    [Tooltip("The maximum level of escalation")]
     [SerializeField] private int maxEscalationLevel = 10;
+    [Tooltip("The current level of escalation")]
     [SerializeField] private int currentEscalationLevel = 1;
 
     [Header("Segments")]
+    [Tooltip("The values of all the segments, which decide when the bar is in the segment")]
     [SerializeField] private float[] segments = { 0, 0, 0, 0 };
+    [Tooltip("The current segment which the bar is in")]
     [SerializeField] private int currentSegment = 1;
 
     [Header("Reduction")]
     [Tooltip("If the player attacks, reset the time till reduction to the reduction time")]
     [SerializeField] private float reductionTime = 3.0f;
+    [Tooltip("The time till it start reducing the escalation")]
     [SerializeField] private float timeTillReduction = 0.0f;
     [Tooltip("The higher the reduction scale, the faster the reduction of the escalation bar")]
     [SerializeField] private float reductionScale = 0.5f;
@@ -155,6 +165,11 @@ public class HandleEscalation : MonoBehaviour
         get { return maxEscalationMultiplier; }
     }
 
+    public float[] Segments
+    {
+        get { return segments; }
+    }
+
     /***    Current Values    ***/
     public float CurrentEscalation
     {
@@ -166,5 +181,29 @@ public class HandleEscalation : MonoBehaviour
     {
         get { return currentEscalationLevel; }
         set { currentEscalationLevel = value; }
+    }
+
+    public int CurrentSegment
+    {
+        get { return currentSegment; }
+        set { currentSegment = value; }
+    }
+
+    /***       Reduction       ***/
+    public float ReductionTime
+    {
+        get { return reductionTime; }
+        set { reductionTime = value; }
+    }
+
+    public float TimeTillReduction
+    {
+        get { return timeTillReduction; }
+    }
+
+    public float ReductionScale
+    {
+        get { return reductionScale; }
+        set { reductionScale = value; }
     }
 }
