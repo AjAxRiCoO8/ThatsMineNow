@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ThatsMineNow/Assets/ThatsMineNow/Kay/Prefabs.meta
 guid: aa4246df5f6ee1c41a40dee0f390de03
 folderAsset: yes
 timeCreated: 1474536205
+=======
+guid: f1632186868b2e143b602c0cad302ca9
+folderAsset: yes
+timeCreated: 1474532822
+>>>>>>> origin/master:ThatsMineNow/Assets/ThatsMineNow/Naomi.meta
 licenseType: Free
 DefaultImporter:
   userData: 
