@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+  enemyLimit: 10
   enemyPrefab: {fileID: 1000011844185900, guid: cdad255111068460ba75d8d0bfa568c2,
     type: 2}

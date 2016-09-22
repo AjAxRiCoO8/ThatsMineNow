@@ -1,20 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour
+{
 
 	public float delay = 3f;
+	public int enemyLimit = 10;
 	public GameObject enemyPrefab;
 
-	// Use this for initialization
-	void Start () {
-		InvokeRepeating ("SpawnEnemy", delay, delay);
+	void Update ()
+	{
+		SpawnEnemy ();
 	}
 
-	public void SpawnEnemy() {
-		var enemy = (GameObject)Instantiate (
-			            enemyPrefab,
-			            transform.position,
-			            transform.rotation);
+	public void SpawnEnemy ()
+	{
+
+		delay -= Time.deltaTime;
+
+		if (delay <= 0 && GameObject.FindGameObjectsWithTag ("Enemy").Length < enemyLimit) {
+			Instantiate (
+				enemyPrefab,
+				transform.position,
+				transform.rotation);
+			delay = 2f;
+		}
+	}
+
+	public void EscalateSpawner (bool escalateUp)
+	{
+		if (escalateUp) {
+			delay /= 2;
+		} else {
+			delay *= 2;
+		}
 	}
 }

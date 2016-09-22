@@ -51,13 +51,11 @@ public class EnemyMovement : MonoBehaviour {
 	public void WalkToObject(GameObject gameObject) {
 		Vector3 objectPosition = gameObject.transform.position;
 		Vector3 pathVector = objectPosition - transform.position;
-		pathVector.y = 0;
-
 		rb.velocity = new Vector3 (0, 0, 0);
 
-		Vector3 normalizedPathVector = pathVector.normalized;
-
 		if (pathVector.sqrMagnitude > 5) {
+			pathVector.y = 0;
+			Vector3 normalizedPathVector = pathVector.normalized;
 			rb.AddForce (normalizedPathVector * (speed * Time.deltaTime));
 			transform.LookAt (objectPosition);
 			transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, 0);
