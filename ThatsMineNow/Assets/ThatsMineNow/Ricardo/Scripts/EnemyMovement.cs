@@ -13,6 +13,8 @@ public class EnemyMovement : MonoBehaviour {
 	bool ballIsChild = false;
 	bool isHit = false;
 
+    NavMeshAgent agent;
+
 	Rigidbody rb;
 
 	void Start() {
@@ -21,6 +23,8 @@ public class EnemyMovement : MonoBehaviour {
 
 		ball = GameObject.FindWithTag ("Ball");
 		gate = GameObject.FindWithTag ("Gate");
+
+        agent = GetComponent<NavMeshAgent>();
 	}
 
 	void Update() {
@@ -62,9 +66,6 @@ public class EnemyMovement : MonoBehaviour {
 
         if (pathVector.sqrMagnitude > 5)
         {
-            rb.AddForce(normalizedPathVector * (speed * Time.deltaTime));
-            transform.LookAt(objectPosition);
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             reachedBall = false;
         }
         else
@@ -72,6 +73,8 @@ public class EnemyMovement : MonoBehaviour {
             rb.velocity = new Vector3(0, 0, 0);
             reachedBall = true;
         }
+
+        agent.SetDestination(gameObject.transform.position);
     }
 
     public void Freeze()
