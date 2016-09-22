@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class HandleEscalation : MonoBehaviour
@@ -64,11 +63,18 @@ public class HandleEscalation : MonoBehaviour
     /*   Getters and Setters   */
     /*                         */
     /***************************/
+    /***          UI         ***/
     public Image EscalationBar
     {
         get { return escalationBar; }
     }
-        
+
+    public Text EscalationText
+    {
+        get { return escalationLevel; }
+    }
+
+    /***      Max Values      ***/
     public int MaxEscalationLevel
     {
         get { return maxEscalationLevel; }
@@ -84,6 +90,7 @@ public class HandleEscalation : MonoBehaviour
         get { return maxEscalationMultiplier; }
     }
 
+    /***    Current Values    ***/
     public float CurrentEscalation
     {
         get { return currentEscalation; }
