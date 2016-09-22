@@ -5,24 +5,17 @@ using UnityEngine.UI;
 public class HandleEscalation : MonoBehaviour
 {
     [Header("Escalation Bar")]
-    [SerializeField]
-    private Image escalationBar;
-    [SerializeField]
-    private Text escalationLevel;
+    [SerializeField] private Image escalationBar;
+    [SerializeField] private Text escalationLevel;
 
     [Header("Escalation Values")]
-    [SerializeField]
-    private float maxEscalation = 100;
-    [SerializeField]
-    private float maxEscalationMultiplier = 2;
-    [SerializeField]
-    private float currentEscalation = 0;
+    [SerializeField] private float maxEscalation = 100;
+    [SerializeField] private float maxEscalationMultiplier = 2;
+    [SerializeField] private float currentEscalation = 0;
 
     [Header("Escalation Level")]
-    [SerializeField]
-    private int maxEscalationLevel = 10;
-    [SerializeField]
-    private int currentEscalationLevel = 1;
+    [SerializeField] private int maxEscalationLevel = 10;
+    [SerializeField] private int currentEscalationLevel = 1;
 	
     void Start()
     {
@@ -35,13 +28,13 @@ public class HandleEscalation : MonoBehaviour
         UpdateEscalationBar();
     }
 
+    /*****************************/
+    /*                           */
+    /*   Update Escalation Bar   */
+    /*                           */
+    /*****************************/
     void UpdateEscalationBar()
     {
-        if (Input.GetKey(KeyCode.X))
-        {
-            currentEscalation++;
-        }
-
         escalationBar.fillAmount = currentEscalation / maxEscalation;   
     }
 
