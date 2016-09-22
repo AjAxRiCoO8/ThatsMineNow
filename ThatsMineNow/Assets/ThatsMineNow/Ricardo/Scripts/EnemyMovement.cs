@@ -1,85 +1,110 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour
+{
 
-	public GameObject ball;
-	public GameObject gate;
-	public float speed = 10000.0f;
+    GameObject ball;
+    GameObject gate;
+    public float speed = 10000.0f;
 
-	public bool walkToBall = true;
+    public bool walkToBall = true;
 
-	bool reachedBall = false;
-	bool ballIsChild = false;
-	bool isHit = false;
+    bool reachedBall = false;
+    bool ballIsChild = false;
+    bool isHit = false;
 
-	Rigidbody rb;
+    Rigidbody rb;
 
-	void Start() {
-		rb = GetComponent<Rigidbody> ();
-		transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, 0);
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-		ball = GameObject.FindWithTag ("Ball");
-		gate = GameObject.FindWithTag ("Gate");
-	}
+        ball = GameObject.FindWithTag("Ball");
+        gate = GameObject.FindWithTag("Gate");
+    }
 
-	void Update() {
+    void Update()
+    {
 
-		Debug.Log (transform.eulerAngles);
-		Debug.Log (IsStanding ());
-		if (walkToBall && !reachedBall && !isHit) {
-			WalkToObject (ball);
-		}
+        Debug.Log(transform.eulerAngles);
+        Debug.Log(IsStanding());
+        if (walkToBall && !reachedBall && !isHit)
+        {
+            WalkToObject(ball);
+        }
 
-		if (reachedBall && !ballIsChild) {
-			ball.transform.parent = transform;
-			ball.transform.localPosition = new Vector3(-0.61f, -0.057f, 0.4f);
-			ballIsChild = true;
-		}
+        if (reachedBall && !ballIsChild)
+        {
+            ball.transform.parent = transform;
+            ball.transform.localPosition = new Vector3(-0.61f, -0.057f, 0.4f);
+            ballIsChild = true;
+        }
 
-		if (ballIsChild) {
-			WalkToObject (gate);
-		}
+        if (ballIsChild && !isHit)
+        {
+            WalkToObject(gate);
+        }
 
-		if (!IsStanding() && isHit && rb.velocity.Equals(Vector3.zero)) {
-			StandUp ();
+        if (!IsStanding() && isHit && rb.velocity.sqrMagnitude < new Vector3(1, 1, 1).sqrMagnitude)
+        {
+            StandUp();
             isHit = false;
-		}
+        }
 
-	}
+    }
 
-	public void WalkToObject(GameObject gameObject) {
-		Vector3 objectPosition = gameObject.transform.position;
-		Vector3 pathVector = objectPosition - transform.position;
-		rb.velocity = new Vector3 (0, 0, 0);
+    public void WalkToObject(GameObject gameObject)
+    {
+        Vector3 objectPosition = gameObject.transform.position;
+        Vector3 pathVector = objectPosition - transform.position;
+        pathVector.y = 0;
 
-		if (pathVector.sqrMagnitude > 5) {
-			pathVector.y = 0;
-			Vector3 normalizedPathVector = pathVector.normalized;
-			rb.AddForce (normalizedPathVector * (speed * Time.deltaTime));
-			transform.LookAt (objectPosition);
-			transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, 0);
-			reachedBall = false;
-		} else {
-			rb.velocity = new Vector3 (0, 0, 0);
-			reachedBall = true;
-		}
-	}
+        rb.velocity = new Vector3(0, 0, 0);
 
-	public void Freeze() {
-		rb.velocity = new Vector3 (0, 0, 0);
-	}
+        Vector3 normalizedPathVector = pathVector.normalized;
 
-	public void Hit() {
-		isHit = true;
-	}
+        if (pathVector.sqrMagnitude > 5)
+        {
+            rb.AddForce(normalizedPathVector * (speed * Time.deltaTime));
+            transform.LookAt(objectPosition);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            reachedBall = false;
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, 0, 0);
+            reachedBall = true;
+        }
+    }
 
-	bool IsStanding() {
-		return transform.eulerAngles.x == 0 && transform.eulerAngles.z == 0;
-	}
+    public void Freeze()
+    {
+        rb.velocity = new Vector3(0, 0, 0);
+    }
 
-	void StandUp() {
-		transform.eulerAngles = new Vector3 (0, 0, 0);
-	}
+    public void Hit()
+    {
+        isHit = true;
+
+        if (ballIsChild)
+        {
+            ballIsChild = false;
+            ball.transform.parent = null;
+            reachedBall = false;
+
+        }
+    }
+
+    bool IsStanding()
+    {
+        return transform.eulerAngles.x == 0 && transform.eulerAngles.z == 0;
+    }
+
+    void StandUp()
+    {
+        transform.eulerAngles = new Vector3(0, 0, 0);
+    }
 
 }

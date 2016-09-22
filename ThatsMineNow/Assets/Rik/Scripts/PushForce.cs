@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PushForce : MonoBehaviour {
+public class PushForce : MonoBehaviour
+{
 
 
     public float viewingDistance;
@@ -44,12 +45,12 @@ public class PushForce : MonoBehaviour {
 
                     //activate the hit script of the enemy
                     GameObject enemy = hit.collider.gameObject;
-                    EnemyMovement enemyMovement =  enemy.GetComponent<EnemyMovement>();
-                    enemyMovement.Hit();
+                    EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+                    if (enemyMovement != null)
+                        enemyMovement.Hit();
 
                 }
             }
         }
     }
 }
-
