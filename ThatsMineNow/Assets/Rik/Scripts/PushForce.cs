@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PushForce : MonoBehaviour {
+public class PushForce : MonoBehaviour
+{
 
 
     public float viewingDistance;
     public int cooldown;
     public float strength;
+    public HandleEscalation handeEscalation;
 
     RaycastHit hit;
 
@@ -44,12 +46,14 @@ public class PushForce : MonoBehaviour {
 
                     //activate the hit script of the enemy
                     GameObject enemy = hit.collider.gameObject;
-                    EnemyMovement enemyMovement =  enemy.GetComponent<EnemyMovement>();
-                    enemyMovement.Hit();
+                    EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+                    if (enemyMovement != null)
+                        enemyMovement.Hit();
+
+                    handeEscalation.CurrentEscalation += 2;
 
                 }
             }
         }
     }
 }
-

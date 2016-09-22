@@ -19,9 +19,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010518563854}
+  - 114: {fileID: 114000010023138948}
   m_Layer: 0
   m_Name: Escalation Bar
-  m_TagString: Untagged
+  m_TagString: Escalation Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +57,7 @@ GameObject:
   - 114: {fileID: 114000011683136716}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Escalation Bar
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +90,6 @@ GameObject:
   - 224: {fileID: 224000013850940852}
   - 222: {fileID: 222000012459539576}
   - 114: {fileID: 114000011846901192}
-  - 114: {fileID: 114000010904745510}
   m_Layer: 5
   m_Name: Escalation Bar
   m_TagString: Untagged
@@ -190,6 +190,33 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &114000010023138948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010360469476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540d020a05afb054bb80c20e0a363330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  escalationBar: {fileID: 114000011683136716}
+  escalationLevel: {fileID: 114000011727403992}
+  maxEscalation: 100
+  maxEscalationMultiplier: 2.2
+  currentEscalation: 0
+  maxEscalationLevel: 10
+  currentEscalationLevel: 1
+  segments:
+  - 0
+  - 0
+  - 0
+  - 0
+  currentSegment: 1
+  reductionTime: 3
+  timeTillReduction: 0
+  reductionScale: 0.5
 --- !u!114 &114000010148131766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,33 +235,6 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
---- !u!114 &114000010904745510
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011718717322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540d020a05afb054bb80c20e0a363330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  escalationBar: {fileID: 114000011683136716}
-  escalationLevel: {fileID: 114000011727403992}
-  maxEscalation: 100
-  maxEscalationMultiplier: 2
-  currentEscalation: 0
-  maxEscalationLevel: 10
-  currentEscalationLevel: 1
-  segments:
-  - 0
-  - 0
-  - 0
-  - 0
-  currentSegment: 1
-  reductionTime: 3
-  timeTillReduction: 0
-  reductionScale: 0.5
 --- !u!114 &114000011507910416
 MonoBehaviour:
   m_ObjectHideFlags: 1
