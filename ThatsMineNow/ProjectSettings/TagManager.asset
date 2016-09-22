@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Escalation Bar
   - GM
+  - Enemy
+  - Ball
+  - Gate
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Ball
+  - Gate
   - 
   - 
   - 

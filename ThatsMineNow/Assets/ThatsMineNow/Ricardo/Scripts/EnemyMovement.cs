@@ -18,6 +18,9 @@ public class EnemyMovement : MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
 		transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, 0);
+
+		ball = GameObject.FindWithTag ("Ball");
+		gate = GameObject.FindWithTag ("Gate");
 	}
 
 	void Update() {
@@ -26,8 +29,6 @@ public class EnemyMovement : MonoBehaviour {
 		Debug.Log (IsStanding ());
 		if (walkToBall && !reachedBall && !isHit) {
 			WalkToObject (ball);
-		} else {
-
 		}
 
 		if (reachedBall && !ballIsChild) {
