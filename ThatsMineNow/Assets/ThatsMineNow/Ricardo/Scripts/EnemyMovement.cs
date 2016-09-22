@@ -27,13 +27,15 @@ public class EnemyMovement : MonoBehaviour {
 
 		Debug.Log (transform.eulerAngles);
 		Debug.Log (IsStanding ());
-		if (walkToBall && !reachedBall && !isHit) {
+		if (walkToBall && !reachedBall && !isHit && !ballIsChild) {
 			WalkToObject (ball);
 		}
 
-		if (reachedBall && !ballIsChild) {
+		if (reachedBall && !ballIsChild && ball.transform.parent == null) {
 			ball.transform.parent = transform;
-			ball.transform.localPosition = new Vector3(-0.61f, -0.057f, 0.4f);
+			ball.transform.localPosition = new Vector3 (-0.61f, -0.057f, 0.4f);
+			ballIsChild = true;
+		} else if (reachedBall && !ballIsChild) {
 			ballIsChild = true;
 		}
 
