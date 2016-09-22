@@ -8,6 +8,7 @@ public class PushForce : MonoBehaviour
     public float viewingDistance;
     public int cooldown;
     public float strength;
+    public HandleEscalation handeEscalation;
 
     RaycastHit hit;
 
@@ -48,6 +49,8 @@ public class PushForce : MonoBehaviour
                     EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
                     if (enemyMovement != null)
                         enemyMovement.Hit();
+
+                    handeEscalation.CurrentEscalation += 2;
 
                 }
             }
