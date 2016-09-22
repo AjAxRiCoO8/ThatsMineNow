@@ -3,16 +3,12 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 
+	public float delay = 3f;
 	public GameObject enemyPrefab;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		SpawnEnemy ();
+		InvokeRepeating ("SpawnEnemy", delay, delay);
 	}
 
 	public void SpawnEnemy() {
