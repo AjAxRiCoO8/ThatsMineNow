@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour {
 		if (walkToBall && !reachedBall && !isHit) {
 			WalkToObject (ball);
 		} else {
-			Freeze ();
+
 		}
 
 		if (reachedBall && !ballIsChild) {
@@ -42,6 +42,7 @@ public class EnemyMovement : MonoBehaviour {
 
 		if (!IsStanding() && isHit && rb.velocity.Equals(Vector3.zero)) {
 			StandUp ();
+            isHit = false;
 		}
 
 	}

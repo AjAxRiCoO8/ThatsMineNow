@@ -8,23 +8,50 @@ public class HandleEscalation : MonoBehaviour
     [SerializeField] private Text escalationLevel;
 
     [Header("Escalation Values")]
-    [SerializeField] private float maxEscalation = 100;
-    [SerializeField] private float maxEscalationMultiplier = 2;
-    [SerializeField] private float currentEscalation = 0;
+    [SerializeField] private float maxEscalation = 100.0f;
+    [SerializeField] private float maxEscalationMultiplier = 2.0f;
+    [SerializeField] private float currentEscalation = 0.0f;
 
     [Header("Escalation Level")]
     [SerializeField] private int maxEscalationLevel = 10;
     [SerializeField] private int currentEscalationLevel = 1;
+
+    [Header("Segments")]
+    [SerializeField] private float[] segments = { 0, 0, 0, 0 };
+    [SerializeField] private int currentSegment = 1;
+
+    [Header("Reduction")]
+    [Tooltip("If the player attacks, reset the time till reduction to the reduction time")]
+    [SerializeField] private float reductionTime = 3.0f;
+    [SerializeField] private float timeTillReduction = 0.0f;
+    [Tooltip("The higher the reduction scale, the faster the reduction of the escalation bar")]
+    [SerializeField] private float reductionScale = 0.5f;
+
 	
     void Start()
     {
         currentEscalation = 0;
+
+        segments[0] = 0;
+        segments[1] = (maxEscalation / 4) * 1;
+        segments[2] = (maxEscalation / 4) * 2;
+        segments[3] = (maxEscalation / 4) * 3;
+
+        timeTillReduction = reductionTime;
     }
 
 	void Update()
     {
         UpdateEscalationLevel();
         UpdateEscalationBar();
+        UpdateReductionTimers();
+
+        //Player attacks ( DEBUGGING)
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            currentEscalation += 5;
+            timeTillReduction = reductionTime;
+        }
     }
 
     /*****************************/
@@ -34,7 +61,12 @@ public class HandleEscalation : MonoBehaviour
     /*****************************/
     void UpdateEscalationBar()
     {
-        escalationBar.fillAmount = currentEscalation / maxEscalation;   
+        escalationBar.fillAmount = currentEscalation / maxEscalation;
+
+        if (currentEscalation > segments[3]) { currentSegment = 4; }
+        else if (currentEscalation > segments[2] && currentSegment < 4) { currentSegment = 3; }
+        else if (currentEscalation > segments[1] && currentSegment < 3) { currentSegment = 2; }
+        else if (currentEscalation >= segments[0] && currentSegment < 2) { currentSegment = 1; }
     }
 
     /*******************************/
@@ -50,10 +82,43 @@ public class HandleEscalation : MonoBehaviour
             {
                 currentEscalation = 0;
                 currentEscalationLevel++;
+                currentSegment = 1;
 
                 escalationLevel.text = currentEscalationLevel.ToString();
 
                 maxEscalation *= maxEscalationMultiplier;
+                UpdateSegments();
+            }
+        }
+    }
+
+    /***********************/
+    /*                     */
+    /*   Update Segments   */
+    /*                     */
+    /***********************/
+    void UpdateSegments()
+    {
+        segments[0] = 0;
+        segments[1] = (maxEscalation / 4) * 1;
+        segments[2] = (maxEscalation / 4) * 2;
+        segments[3] = (maxEscalation / 4) * 3;
+    }
+
+    /*******************************/
+    /*                             */
+    /*   Update Reduction Timers   */
+    /*                             */
+    /*******************************/
+    void UpdateReductionTimers()
+    {
+        timeTillReduction -= Time.deltaTime;
+
+        if (timeTillReduction < 0)
+        {
+            if (currentEscalation > segments[currentSegment - 1])
+            {
+                currentEscalation -= Time.deltaTime * reductionScale;
             }
         }
     }
